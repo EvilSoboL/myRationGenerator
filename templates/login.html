@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask+Sqlite3</title>
+</head>
+<body>
+    <center>
+        <h1>Flask+Sqlite3 Login </h1>
+    </center>
+    <center>
+        <form method="POST" action="{{ url_for('login') }}">
+            <input type="text" name="username" placeholder="username" required>
+            <input type="password" name="password" placeholder="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </center>
+    <center>
+        <h1>Dont have an account ?</h1><a href="{{ url_for('register') }}"> Register</a>
+        
+    </center>
+    
+</body>
+</html>
