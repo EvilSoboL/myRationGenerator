@@ -19,16 +19,28 @@ class DatabaseHandler:
         with self.connection:
             self.cursor.execute()
 
-    def get_unique_fuels_in_experiments(self) -> int:
+    def get_random_dish(self, category: str) -> tuple:
         """
-        Метод, который возвращает количество уникальных fuel_id в таблице experiment.
+        Возвращает случайное блюдо из выбранной категории.
+        Список категорий:
+        Завтрак, Бульон, Закуски, Основные блюда, Паста и пицца, Салаты
         """
         with self.connection:
             self.cursor.execute(
-                """
-                SELECT COUNT(DISTINCT fuel_id) AS unique_fuels_count FROM "main"."experiments"
-                """
+                f"""
+                SELECT * 
+                FROM dishes
+                WHERE category = ? 
+                ORDER BY RANDOM() 
+                LIMIT 1
+                """,
+                (category,)
             )
-            result = self.cursor.fetchone()[0]
+            result = self.cursor.fetchone()
         return result
 
+    def get_ingredients(self, dish_id):
+        """
+        Метод, который возвращает список ингредиентов для определенного блюда.
+        """
+        pass
