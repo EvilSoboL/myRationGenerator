@@ -3,6 +3,7 @@ from flask import render_template, request, redirect, url_for, session
 from flask import Flask
 
 from config import PATH_TO_USER_DB
+from entity.daily_ration import DailyRation
 
 app = Flask(__name__)
 app.secret_key = 'MYSECRETKEY'
@@ -66,9 +67,18 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/profile', methods=['GET', 'POST'])
-def index():
-    return render_template('index.html')
+@app.route('/main_menu', methods=['GET', 'POST'])
+def main_menu():
+    ration = DailyRation()
+    ration.get_daily_ration()
+
+    return render_template(
+        'main_menu.html',
+        breakfast=ration.breakfast.name,
+        lunch=ration.lunch.name,
+        dinner=ration.dinner.name,
+        snack=ration.snack.name
+    )
 
 
 if __name__ == '__main__':

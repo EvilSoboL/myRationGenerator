@@ -19,6 +19,11 @@ class Dish:
         self.database = DatabaseHandler()
 
     def get_random_dish(self, category: str) -> None:
+        """
+        Возвращает случайное блюдо из выбранной категории.
+        Список категорий:
+        Завтрак, Бульон, Закуски, Основные блюда, Паста и пицца, Салаты.
+        """
         dish_info = self.database.get_random_dish(category)
         self.id = dish_info[0]
         self.category = dish_info[1]
@@ -35,9 +40,3 @@ class Dish:
         ingredient_dict = self.database.get_ingredients_name_from_id(id_dict)
 
         self.ingredients = ingredient_dict
-
-
-dish = Dish()
-dish.get_random_dish('Завтрак')
-print(dish.recipe)
-print(dish.ingredients)
